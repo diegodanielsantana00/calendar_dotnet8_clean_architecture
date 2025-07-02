@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35825.156 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiegoSantanaCalendar.Api", "DiegoSantanaCalendar.Api\DiegoSantanaCalendar.Api.csproj", "{6B835886-D83D-4AC9-9A4D-AAD8F9C3B70B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiegoSantanaCalendar.Application", "DiegoSantanaCalendar.Application\DiegoSantanaCalendar.Application.csproj", "{4DE4D10C-0A99-4E60-9052-8FA1C4BA02EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiegoSantanaCalendar.CrossCutting", "DiegoSantanaCalendar.CrossCutting\DiegoSantanaCalendar.CrossCutting.csproj", "{36817EE6-00D6-4F56-93B7-F86A80448C6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiegoSantanaCalendar.Domain", "DiegoSantanaCalendar.Domain\DiegoSantanaCalendar.Domain.csproj", "{510A9474-E1B7-4D0F-BD8A-B4A33479FE2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiegoSantanaCalendar.Infrastructure", "DiegoSantanaCalendar.Infrastructure\DiegoSantanaCalendar.Infrastructure.csproj", "{4B4E891D-38AC-4A50-8391-66C8CD849128}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiegoSantanaCalendar.Test", "DiegoSantanaCalendar.Test\DiegoSantanaCalendar.Test.csproj", "{7F7B18B3-AC31-434B-A94D-7956AC455F5C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6B835886-D83D-4AC9-9A4D-AAD8F9C3B70B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B835886-D83D-4AC9-9A4D-AAD8F9C3B70B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B835886-D83D-4AC9-9A4D-AAD8F9C3B70B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B835886-D83D-4AC9-9A4D-AAD8F9C3B70B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DE4D10C-0A99-4E60-9052-8FA1C4BA02EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DE4D10C-0A99-4E60-9052-8FA1C4BA02EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DE4D10C-0A99-4E60-9052-8FA1C4BA02EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DE4D10C-0A99-4E60-9052-8FA1C4BA02EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36817EE6-00D6-4F56-93B7-F86A80448C6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36817EE6-00D6-4F56-93B7-F86A80448C6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36817EE6-00D6-4F56-93B7-F86A80448C6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36817EE6-00D6-4F56-93B7-F86A80448C6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{510A9474-E1B7-4D0F-BD8A-B4A33479FE2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{510A9474-E1B7-4D0F-BD8A-B4A33479FE2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{510A9474-E1B7-4D0F-BD8A-B4A33479FE2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{510A9474-E1B7-4D0F-BD8A-B4A33479FE2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B4E891D-38AC-4A50-8391-66C8CD849128}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B4E891D-38AC-4A50-8391-66C8CD849128}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B4E891D-38AC-4A50-8391-66C8CD849128}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B4E891D-38AC-4A50-8391-66C8CD849128}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F7B18B3-AC31-434B-A94D-7956AC455F5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F7B18B3-AC31-434B-A94D-7956AC455F5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F7B18B3-AC31-434B-A94D-7956AC455F5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F7B18B3-AC31-434B-A94D-7956AC455F5C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CA394629-C3EC-427A-98F8-E10625011FB9}
+	EndGlobalSection
+EndGlobal

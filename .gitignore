@@ -1,0 +1,23 @@
+# Ignore build artifacts
+bin/
+obj/
+
+# Ignore Visual Studio files
+*.sdf
+*.suo
+*.user
+*.csproj.user
+
+# Ignore NuGet packages (if not using PackageReference)
+packages/
+
+# Ignore .vs folder (VS settings)
+.vs/
+
+# Ignore local settings
+*.config.user
+
+# Ignore other common files
+Thumbs.db
+*.tmp
+*.log
