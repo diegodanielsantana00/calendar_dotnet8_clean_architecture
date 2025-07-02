@@ -15,6 +15,7 @@ namespace DiegoSantanaCalendar.CrossCutting.Compromise.Setups
 
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IJWTService, JWTService>();
+            services.AddScoped<IContactService, ContactService>();
         }
 
     }

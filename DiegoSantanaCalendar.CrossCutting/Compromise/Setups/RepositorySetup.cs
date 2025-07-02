@@ -14,6 +14,7 @@ namespace DiegoSantanaCalendar.CrossCutting.Compromise.Setups
         {
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IContactRepository, ContactRepository>();
             //services.AddScoped<IUserRepository, UserRepository>();
         }
 

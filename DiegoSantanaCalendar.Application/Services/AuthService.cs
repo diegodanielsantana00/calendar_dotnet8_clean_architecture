@@ -63,8 +63,7 @@ namespace DiegoSantanaCalendar.Application.Services
                 UserName = username,
             };
 
-            await this.CreateRoleAsync("Colaborador");
-            await this.CreateRoleAsync("Analista Financeiro");
+            await this.CreateRoleAsync("Membro");
             await this.CreateRoleAsync("Administrador");
             var result = await _userManager.CreateAsync(userSystem, password);
             

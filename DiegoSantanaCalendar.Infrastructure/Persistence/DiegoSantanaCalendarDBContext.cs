@@ -18,6 +18,7 @@ namespace DiegoSantanaCalendar.Infrastructure.Persistence
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             base.OnModelCreating(modelBuilder);
         }
+        public DbSet<Contact> Contact { get; set; }
 
     }
 }
