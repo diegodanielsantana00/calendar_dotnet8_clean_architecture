@@ -12,7 +12,8 @@ namespace DiegoSantanaCalendar.CrossCutting.Compromise.Setups
         public static void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<MapperDtoToEntities>();
-
+            services.AddSingleton<IMessagePublisher, RabbitMqPublisher>();
+            services.AddHostedService<ContactStatusUpdateConsumer>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IJWTService, JWTService>();
             services.AddScoped<IContactService, ContactService>();

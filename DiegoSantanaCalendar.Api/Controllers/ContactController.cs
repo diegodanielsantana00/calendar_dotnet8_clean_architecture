@@ -58,4 +58,12 @@ public class ContactController : ControllerBase
         var jobFunctions = await _contactService.GetAll();
         return Ok(jobFunctions);
     }
+
+    [HttpPatch("updateStatus")]
+    [ValidateDto<UpdateContactStatusDto>]
+    public async Task<ActionResult> UpdateStatus([FromBody] UpdateContactStatusDto dto)
+    {
+        await _contactService.UpdateStatusAsync(dto);
+        return Ok("Solicitação de atualização de status recebida e em processamento.");
+    }
 }

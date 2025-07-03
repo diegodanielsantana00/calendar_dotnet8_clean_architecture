@@ -12,5 +12,7 @@ namespace DiegoSantanaCalendar.Application.Interfaces
         Task Create(CreateContactDTO dto, Guid idUser);
         Task Update(UpdateContactDTO dto);
         Task Delete(Guid id);
+        Task UpdateStatusAsync(UpdateContactStatusDto dto);
+
     }
 }

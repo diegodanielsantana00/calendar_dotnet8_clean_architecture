@@ -10,13 +10,16 @@ namespace DiegoSantanaCalendar.Application.Services
     {
         private readonly IContactRepository _contactRepository;
         private readonly MapperDtoToEntities _mapper;
+        private readonly IMessagePublisher _messagePublisher;
 
         public ContactService(
             IContactRepository contactRepository,
-            MapperDtoToEntities mapper)
+            MapperDtoToEntities mapper,
+            IMessagePublisher messagePublisher)
         {
             _mapper = mapper;
             _contactRepository = contactRepository;
+            _messagePublisher = messagePublisher;
         }
 
         public async Task Create(CreateContactDTO dto, Guid userId)
@@ -53,6 +56,12 @@ namespace DiegoSantanaCalendar.Application.Services
             if (jobFunction == null) throw new KeyNotFoundException($"Contato com ID {dto.Id} não encontrada.");
             await _mapper.MapToExistingAsync(dto, jobFunction);
             await _contactRepository.UpdateAsync(jobFunction);
+        }
+
+        public Task UpdateStatusAsync(UpdateContactStatusDto dto)
+        {
+            _messagePublisher.PublishUpdateContactStatus(dto);
+            return Task.CompletedTask;
         }
     }
 }

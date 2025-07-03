@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using FluentValidation;
 using DiegoSantanaCalendar.Application.Validate.Auth;
+using DiegoSantanaCalendar.Application.Validate.Contact;
 
 namespace DiegoSantanaCalendar.CrossCutting.Compromise.Setups
 {
@@ -11,6 +12,9 @@ namespace DiegoSantanaCalendar.CrossCutting.Compromise.Setups
         {
             services.AddValidatorsFromAssemblyContaining<LoginValidate>();
             services.AddValidatorsFromAssemblyContaining<RegisterValidate>();
+            services.AddValidatorsFromAssemblyContaining<CreateContactDTOValidate>();
+            services.AddValidatorsFromAssemblyContaining<UpdateContactDTOValidate>();
+            services.AddValidatorsFromAssemblyContaining<UpdateContactStatusDtoValidate>();
 
         }
     }
