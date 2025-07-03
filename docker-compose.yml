@@ -1,0 +1,30 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: diegosantanahost
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  diegosantanacalendar.api:
+    image: ${DOCKER_REGISTRY-}diegosantanacalendarapi
+    build:
+      context: .
+      dockerfile: DiegoSantanaCalendar.Api/Dockerfile
+    depends_on:
+      - postgres
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "5000:5000"
+      - "5001:5001"
+    volumes:
+      - ./DiegoSantanaCalendar2:/app
+volumes:
+  postgres_data:
