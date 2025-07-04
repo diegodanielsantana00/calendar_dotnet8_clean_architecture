@@ -15,7 +15,7 @@ namespace DiegoSantanaCalendar.Application.Services
 
         public RabbitMqPublisher()
         {
-            var factory = new ConnectionFactory() { HostName = "localhost" };
+            var factory = new ConnectionFactory() { HostName = "rabbitmq" };
             _connection = factory.CreateConnection();
         }
 
