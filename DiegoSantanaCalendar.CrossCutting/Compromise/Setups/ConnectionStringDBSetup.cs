@@ -17,6 +17,7 @@ namespace DiegoSantanaCalendar.CrossCutting.Compromise.Setups
         public static void ConfigureConnectionStringDB(IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString("DatabaseDiegoSantanaCalendar");
+            Console.WriteLine(connectionString);
             services.AddDbContext<DiegoSantanaCalendarDBContext>(options =>
             {
                 options.UseNpgsql(connectionString);
