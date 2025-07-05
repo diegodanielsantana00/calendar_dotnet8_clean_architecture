@@ -67,6 +67,8 @@ if (app.Environment.IsDevelopment())
 else
 {
     app.UseCors("CorsProd");
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
