@@ -1,19 +1,47 @@
-name: Docker Image CI
+name: Deploy .NET App to Ubuntu Server with Docker
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
-
-  build:
-
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build . --file ./DiegoSantanaCalendar.Api/Dockerfile --tag my-image-name:$(date +%s)
+      - name: Checkout code
+        uses: actions/checkout@v2
 
+      - name: Build the Docker image
+        run: |
+          docker build . -f DiegoSantanaCalendar.Api/Dockerfile -t api-test-bluetechnology:latest
+
+      - name: Save Docker image to tar file
+        run: |
+          docker save api-test-bluetechnology:latest > api-test-bluetechnology.tar
+
+      - name: Copy Docker image to server
+        env:
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+          SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y sshpass
+          sshpass -p "$SERVER_PASSWORD" scp -o StrictHostKeyChecking=no api-test-bluetechnology.tar $SERVER_USER@$SERVER_IP:$DEPLOY_PATH
+
+      - name: Deploy Docker container on server
+        env:
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+          SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+        run: |
+          sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "
+            docker stop api-test-bluetechnology || true
+            docker rm api-test-bluetechnology || true
+            docker load -i $DEPLOY_PATH/api-test-bluetechnology.tar
+            docker run -d --name api-test-bluetechnology -p 8101:80 api-test-bluetechnology:latest
+          "
