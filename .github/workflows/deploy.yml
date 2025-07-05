@@ -14,9 +14,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Replace appsettings variables
         run: |
-          sed -i "s|\$CONNECTIONSTRING\$|${{ secrets.CONNECTIONSTRING }}|g" DiegoSantanaCalendar.Api/appsettings.json
-          sed -i "s|\$KEYJWT\$|${{ secrets.KEYJWT }}|g" DiegoSantanaCalendar.Api/appsettings.json
-          cat DiegoSantanaCalendar.Api/appsettings.json
+          sed -i "s|\\\$CONNECTIONSTRING\\\$|${{ secrets.CONNECTIONSTRING }}|g" DiegoSantanaCalendar.Api/appsettings.json
+          sed -i "s|\\\$KEYJWT\\\$|${{ secrets.KEYJWT }}|g" DiegoSantanaCalendar.Api/appsettings.json
 
       - name: Build the Docker image
         run: |
