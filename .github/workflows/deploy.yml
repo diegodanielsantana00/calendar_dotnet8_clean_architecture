@@ -1,4 +1,4 @@
-name: Deploy .NET App to Ubuntu Server with Docker
+name: Deploy .NET App to Ubuntu Server with Docker Compose
 
 on:
   push:
@@ -12,31 +12,26 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
       - name: Replace appsettings variables
         run: |
-          sed -i "s|\\\$CONNECTIONSTRING\\\$|${{ secrets.CONNECTIONSTRING }}|g" DiegoSantanaCalendar.Api/appsettings.json
           sed -i "s|\\\$KEYJWT\\\$|${{ secrets.KEYJWT }}|g" DiegoSantanaCalendar.Api/appsettings.json
           cat DiegoSantanaCalendar.Api/appsettings.json
-      - name: Build the Docker image
-        run: |
-          docker build . -f DiegoSantanaCalendar.Api/Dockerfile -t api-test-bluetechnology:latest
 
-      - name: Save Docker image to tar file
-        run: |
-          docker save api-test-bluetechnology:latest > api-test-bluetechnology.tar
+      - name: Install sshpass
+        run: sudo apt-get update && sudo apt-get install -y sshpass
 
-      - name: Copy Docker image to server
+      - name: Copy project files to server
         env:
           SERVER_USER: ${{ secrets.SERVER_USER }}
           SERVER_IP: ${{ secrets.SERVER_IP }}
           SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
           DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
         run: |
-          sudo apt-get update
-          sudo apt-get install -y sshpass
-          sshpass -p "$SERVER_PASSWORD" scp -o StrictHostKeyChecking=no api-test-bluetechnology.tar $SERVER_USER@$SERVER_IP:$DEPLOY_PATH
+          sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "mkdir -p $DEPLOY_PATH"
+          sshpass -p "$SERVER_PASSWORD" scp -o StrictHostKeyChecking=no -r . $SERVER_USER@$SERVER_IP:$DEPLOY_PATH
 
-      - name: Deploy Docker container on server
+      - name: Run docker-compose on server
         env:
           SERVER_USER: ${{ secrets.SERVER_USER }}
           SERVER_IP: ${{ secrets.SERVER_IP }}
@@ -44,8 +39,9 @@ jobs:
           DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
         run: |
           sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "
-            docker stop api-test-bluetechnology || true
-            docker rm api-test-bluetechnology || true
-            docker load -i $DEPLOY_PATH/api-test-bluetechnology.tar
-            docker run -d --name api-test-bluetechnology -p 8100:80 api-test-bluetechnology:latest
+            cd $DEPLOY_PATH
+            docker-compose down || true
+            docker-compose pull || true
+            docker-compose build
+            docker-compose up -d
           "
