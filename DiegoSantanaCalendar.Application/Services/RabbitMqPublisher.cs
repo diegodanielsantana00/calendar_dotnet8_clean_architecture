@@ -1,5 +1,6 @@
 ﻿using DiegoSantanaCalendar.Application.DTOs.Contact;
 using DiegoSantanaCalendar.Application.Interfaces;
+using Microsoft.Extensions.Configuration;
 using RabbitMQ.Client;
 using System;
 using System.Collections.Generic;
@@ -13,9 +14,10 @@ namespace DiegoSantanaCalendar.Application.Services
         private readonly IConnection _connection;
         private const string QueueName = "contact-status-updates";
 
-        public RabbitMqPublisher()
+        public RabbitMqPublisher(IConfiguration configuration)
         {
-            var factory = new ConnectionFactory() { HostName = "rabbitmq" };
+            var rabbitMqHost = configuration["RabbitMQ:Host"];
+            var factory = new ConnectionFactory() { HostName = rabbitMqHost };
             _connection = factory.CreateConnection();
         }
 

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Text.Json;
 using DiegoSantanaCalendar.Application.DTOs.Contact;
 using DiegoSantanaCalendar.Domain.Interfaces;
+using Microsoft.Extensions.Configuration;
 
 namespace DiegoSantanaCalendar.Application.Interfaces
 {
@@ -20,10 +21,11 @@ namespace DiegoSantanaCalendar.Application.Interfaces
         private readonly IServiceScopeFactory _scopeFactory;
         private const string QueueName = "contact-status-updates";
 
-        public ContactStatusUpdateConsumer(IServiceScopeFactory scopeFactory)
+        public ContactStatusUpdateConsumer(IServiceScopeFactory scopeFactory, IConfiguration configuration)
         {
+            var rabbitMqHost = configuration["RabbitMQ:Host"];
             _scopeFactory = scopeFactory;
-            var factory = new ConnectionFactory() { HostName = "rabbitmq" };
+            var factory = new ConnectionFactory() { HostName = rabbitMqHost };
             _connection = factory.CreateConnection();
             _channel = _connection.CreateModel();
             _channel.QueueDeclare(queue: QueueName, durable: true, exclusive: false, autoDelete: false, arguments: null);
