@@ -43,5 +43,5 @@ jobs:
             docker stop api-test-bluetechnology || true
             docker rm api-test-bluetechnology || true
             docker load -i $DEPLOY_PATH/api-test-bluetechnology.tar
-            docker run -d --name api-test-bluetechnology -p 8101:80 api-test-bluetechnology:latest
+            docker run -d --name api-test-bluetechnology -p 8100:80 api-test-bluetechnology:latest
           "
