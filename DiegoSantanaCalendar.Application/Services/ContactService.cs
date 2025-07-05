@@ -42,6 +42,12 @@ namespace DiegoSantanaCalendar.Application.Services
             return await _contactRepository.GetAllAsync();
         }
 
+        public async Task<IEnumerable<Contact>> GetAllByIdUser(Guid idUser)
+        {
+            return await _contactRepository.GetAllByIdUser(idUser);
+        }
+
+
         public async Task<Contact> GetById(Guid id)
         {
             var result = await _contactRepository.GetByIdAsync(id);

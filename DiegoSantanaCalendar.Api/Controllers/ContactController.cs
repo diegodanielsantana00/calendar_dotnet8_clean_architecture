@@ -1,6 +1,7 @@
 ﻿using DiegoSantanaCalendar.API.Attributes;
 using DiegoSantanaCalendar.Application.DTOs.Contact;
 using DiegoSantanaCalendar.Application.Interfaces;
+using DiegoSantanaCalendar.Application.ViewModels;
 using DiegoSantanaCalendar.Domain.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -25,7 +26,7 @@ public class ContactController : ControllerBase
     {
         var idUser = User.FindFirstValue(ClaimTypes.NameIdentifier);
         await _contactService.Create(dto, new Guid(idUser));
-        return Ok();
+        return Ok("Criado com sucesso.");
     }
 
     [HttpPut("update")]
@@ -33,14 +34,14 @@ public class ContactController : ControllerBase
     public async Task<ActionResult> Update([FromBody] UpdateContactDTO dto)
     {
         await _contactService.Update(dto);
-        return Ok();
+        return Ok("Atualizado com sucesso");
     }
 
     [HttpDelete("delete/{id}")]
     public async Task<ActionResult> Delete(Guid id)
     {
         await _contactService.Delete(id);
-        return Ok();
+        return Ok("Deletado com sucesso.");
     }
 
     [HttpGet("getById/{id}")]
@@ -55,8 +56,24 @@ public class ContactController : ControllerBase
     [HttpGet("getAll")]
     public async Task<ActionResult<IEnumerable<Contact>>> GetAll()
     {
-        var jobFunctions = await _contactService.GetAll();
+        var idUser = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var jobFunctions = await _contactService.GetAllByIdUser(new Guid(idUser));
         return Ok(jobFunctions);
+    }
+
+    [HttpGet("getStats")]
+    public ActionResult<IEnumerable<ContactStats>> getStats()
+    {
+        var mockStats = new List<ContactStats>
+    {
+        new ContactStats { Month = "Janeiro", Count = 10 },
+        new ContactStats { Month = "Fevereiro", Count = 15 },
+        new ContactStats { Month = "Março", Count = 8 },
+        new ContactStats { Month = "Abril", Count = 20 },
+        new ContactStats { Month = "Maio", Count = 12 }
+    };
+
+        return Ok(mockStats);
     }
 
     [HttpPatch("updateStatus")]
@@ -66,4 +83,8 @@ public class ContactController : ControllerBase
         await _contactService.UpdateStatusAsync(dto);
         return Ok("Solicitação de atualização de status recebida e em processamento.");
     }
+
+
+
+
 }
