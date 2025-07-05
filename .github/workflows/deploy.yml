@@ -16,7 +16,7 @@ jobs:
         run: |
           sed -i "s|\\\$CONNECTIONSTRING\\\$|${{ secrets.CONNECTIONSTRING }}|g" DiegoSantanaCalendar.Api/appsettings.json
           sed -i "s|\\\$KEYJWT\\\$|${{ secrets.KEYJWT }}|g" DiegoSantanaCalendar.Api/appsettings.json
-
+          cat DiegoSantanaCalendar.Api/appsettings.json
       - name: Build the Docker image
         run: |
           docker build . -f DiegoSantanaCalendar.Api/Dockerfile -t api-test-bluetechnology:latest
