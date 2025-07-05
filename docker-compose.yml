@@ -35,10 +35,11 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Development
     ports:
-      - "5000:5000"
-      - "5001:5001"
-    volumes:
-      - ./DiegoSantanaCalendar.Api:/app
+      - "8000:8000"
+      - "8002:8002"
+    # volumes:
+      # - ./DiegoSantanaCalendar.Api:/app
+
 volumes:
   postgres_data:
   rabbitmq_data:
